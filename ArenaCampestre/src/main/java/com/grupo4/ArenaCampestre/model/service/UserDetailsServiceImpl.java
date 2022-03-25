@@ -1,4 +1,4 @@
-package com.grupo4.ArenaCampestre.service;
+package com.grupo4.ArenaCampestre.model.service;
 
 
 import org.springframework.security.core.GrantedAuthority;
@@ -9,9 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.grupo4.ArenaCampestre.model.Role;
-import com.grupo4.ArenaCampestre.model.User;
-import com.grupo4.ArenaCampestre.repository.UserRepository;
+import com.grupo4.ArenaCampestre.model.entities.Customer;
+import com.grupo4.ArenaCampestre.model.entities.Manager;
+import com.grupo4.ArenaCampestre.model.entities.User;
+import com.grupo4.ArenaCampestre.model.enums.Perfil;
+import com.grupo4.ArenaCampestre.model.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,8 +32,12 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         if (user == null) throw new UsernameNotFoundException(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (Role role : user.getRoles()){
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        
+        if(user instanceof Manager) {
+        	grantedAuthorities.add(new SimpleGrantedAuthority(Perfil.MANAGER.getDescription()));
+        }
+        if(user instanceof Customer) {
+        	grantedAuthorities.add(new SimpleGrantedAuthority(Perfil.CUSTUMER.getDescription()));
         }
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);

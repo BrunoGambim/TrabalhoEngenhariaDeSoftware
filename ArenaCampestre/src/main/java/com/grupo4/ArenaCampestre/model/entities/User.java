@@ -1,10 +1,10 @@
-package com.grupo4.ArenaCampestre.model;
+package com.grupo4.ArenaCampestre.model.entities;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +16,6 @@ public class User {
 
     @Transient
     private String passwordConfirm;
-
-    @ManyToMany
-    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -50,13 +47,5 @@ public class User {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 }

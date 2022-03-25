@@ -1,4 +1,4 @@
-package com.grupo4.ArenaCampestre.service;
+package com.grupo4.ArenaCampestre.model.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

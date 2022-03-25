@@ -1,6 +1,7 @@
-package com.grupo4.ArenaCampestre.web;
+package com.grupo4.ArenaCampestre.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.grupo4.ArenaCampestre.model.User;
-import com.grupo4.ArenaCampestre.service.SecurityService;
-import com.grupo4.ArenaCampestre.service.UserService;
+import com.grupo4.ArenaCampestre.model.entities.User;
+import com.grupo4.ArenaCampestre.model.service.SecurityService;
+import com.grupo4.ArenaCampestre.model.service.UserService;
+import com.grupo4.ArenaCampestre.model.validator.UserValidator;
 
 @Controller
 public class UserController {

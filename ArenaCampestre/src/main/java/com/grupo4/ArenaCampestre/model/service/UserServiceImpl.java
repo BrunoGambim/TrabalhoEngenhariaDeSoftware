@@ -1,29 +1,28 @@
-package com.grupo4.ArenaCampestre.service;
+package com.grupo4.ArenaCampestre.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.grupo4.ArenaCampestre.model.User;
-import com.grupo4.ArenaCampestre.repository.RoleRepository;
-import com.grupo4.ArenaCampestre.repository.UserRepository;
-
-import java.util.HashSet;
+import com.grupo4.ArenaCampestre.model.entities.Customer;
+import com.grupo4.ArenaCampestre.model.entities.User;
+import com.grupo4.ArenaCampestre.model.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
-        userRepository.save(user);
+    	Customer custumer = new Customer();
+    	
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));;
+        custumer.setPassword(user.getPassword());
+        custumer.setUsername(user.getUsername());
+        userRepository.save(custumer);
     }
 
     @Override
