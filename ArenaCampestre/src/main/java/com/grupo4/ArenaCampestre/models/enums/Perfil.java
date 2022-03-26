@@ -1,4 +1,4 @@
-package com.grupo4.ArenaCampestre.model.enums;
+package com.grupo4.ArenaCampestre.models.enums;
 
 public enum Perfil {
 	CUSTUMER(1, "ROLE_CUSTOMER"),

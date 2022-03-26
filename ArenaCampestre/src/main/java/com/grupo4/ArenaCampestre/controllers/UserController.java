@@ -1,4 +1,4 @@
-package com.grupo4.ArenaCampestre.controller;
+package com.grupo4.ArenaCampestre.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.grupo4.ArenaCampestre.model.entities.User;
-import com.grupo4.ArenaCampestre.model.service.SecurityService;
-import com.grupo4.ArenaCampestre.model.service.UserService;
-import com.grupo4.ArenaCampestre.model.validator.UserValidator;
+import com.grupo4.ArenaCampestre.models.entities.User;
+import com.grupo4.ArenaCampestre.models.services.SecurityService;
+import com.grupo4.ArenaCampestre.models.services.UserService;
+import com.grupo4.ArenaCampestre.models.validators.UserValidator;
 
 @Controller
 public class UserController {

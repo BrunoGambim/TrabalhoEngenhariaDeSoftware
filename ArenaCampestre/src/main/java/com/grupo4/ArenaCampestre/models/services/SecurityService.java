@@ -1,4 +1,4 @@
-package com.grupo4.ArenaCampestre.model.service;
+package com.grupo4.ArenaCampestre.models.services;
 
 public interface SecurityService {
 	boolean isAuthenticated();

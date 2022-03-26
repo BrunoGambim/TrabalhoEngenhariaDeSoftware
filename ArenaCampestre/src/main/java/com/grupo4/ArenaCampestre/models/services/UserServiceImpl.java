@@ -1,12 +1,12 @@
-package com.grupo4.ArenaCampestre.model.service;
+package com.grupo4.ArenaCampestre.models.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.grupo4.ArenaCampestre.model.entities.Customer;
-import com.grupo4.ArenaCampestre.model.entities.User;
-import com.grupo4.ArenaCampestre.model.repository.UserRepository;
+import com.grupo4.ArenaCampestre.models.entities.Customer;
+import com.grupo4.ArenaCampestre.models.entities.User;
+import com.grupo4.ArenaCampestre.models.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {

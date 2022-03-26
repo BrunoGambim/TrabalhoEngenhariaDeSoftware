@@ -1,4 +1,4 @@
-package com.grupo4.ArenaCampestre.model.entities;
+package com.grupo4.ArenaCampestre.models.entities;
 
 import javax.persistence.*;
 

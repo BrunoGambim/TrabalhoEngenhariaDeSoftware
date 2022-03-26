@@ -1,4 +1,4 @@
-package com.grupo4.ArenaCampestre.model.validator;
+package com.grupo4.ArenaCampestre.models.validators;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -6,8 +6,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.grupo4.ArenaCampestre.model.entities.User;
-import com.grupo4.ArenaCampestre.model.service.UserService;
+import com.grupo4.ArenaCampestre.models.entities.User;
+import com.grupo4.ArenaCampestre.models.services.UserService;
 
 @Component
 public class UserValidator implements Validator {

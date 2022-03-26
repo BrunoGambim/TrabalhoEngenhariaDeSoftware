@@ -1,4 +1,4 @@
-package com.grupo4.ArenaCampestre.config;
+package com.grupo4.ArenaCampestre.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

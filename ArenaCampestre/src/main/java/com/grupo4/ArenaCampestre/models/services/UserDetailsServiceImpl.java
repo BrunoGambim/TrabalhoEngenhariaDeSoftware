@@ -1,4 +1,4 @@
-package com.grupo4.ArenaCampestre.model.service;
+package com.grupo4.ArenaCampestre.models.services;
 
 
 import org.springframework.security.core.GrantedAuthority;
@@ -9,11 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.grupo4.ArenaCampestre.model.entities.Customer;
-import com.grupo4.ArenaCampestre.model.entities.Manager;
-import com.grupo4.ArenaCampestre.model.entities.User;
-import com.grupo4.ArenaCampestre.model.enums.Perfil;
-import com.grupo4.ArenaCampestre.model.repository.UserRepository;
+import com.grupo4.ArenaCampestre.models.entities.Customer;
+import com.grupo4.ArenaCampestre.models.entities.Manager;
+import com.grupo4.ArenaCampestre.models.entities.User;
+import com.grupo4.ArenaCampestre.models.enums.Perfil;
+import com.grupo4.ArenaCampestre.models.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
