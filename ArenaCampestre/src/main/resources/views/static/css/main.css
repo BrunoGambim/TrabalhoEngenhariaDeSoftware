@@ -40,12 +40,12 @@ body {
     }
 }
 
-.btn-primary{
+.button-primary{
     background-color: #027333;
     border-color: #025928;
 }
 
-.btn-primary:hover{
+.button-primary:hover{
     background-color: #038C3E;
     border-color: #025928;
 }
