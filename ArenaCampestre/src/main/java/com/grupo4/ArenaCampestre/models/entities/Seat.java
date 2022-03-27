@@ -55,6 +55,10 @@ public class Seat {
 	public String getCode() {
 		return code;
 	}
+	
+	public Double getPrice() {
+		return 50.00;
+	}
 
 	public void setCode(String code) {
 		this.code = code;

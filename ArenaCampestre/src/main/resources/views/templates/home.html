@@ -11,6 +11,12 @@
       <h1>Arena Campestre</h1>
     </header>
     <div class="container-md pt-5">
+      <form class="mb-2" th:action="@{/home}" method="get">
+	    <select class="form-select form-control" name="sector" id="sector" th:value="${sector}" onchange="this.form.submit()">
+		  <option th:selected="${sectorCode == 0}" value="0">Setor</option>
+		  <option th:each="sector: ${sectors}" th:selected="${sectorCode == sector.code}" th:value="${sector.code}"><span th:text="${sector}"></span></option>
+		</select>
+      </form>
       <div th:each="seat: ${seats}" class="card mb-2">
 		  <div class="card-body row">
 		    <div class="col">
@@ -21,6 +27,9 @@
 		    </div>
 		    <div class="col">
 		      <span th:text="${seat.sector}"></span>
+		    </div>
+		    <div class="col">
+		      R$ <span th:text="${seat.price}"></span>
 		    </div>
 		  </div>
 	  </div>

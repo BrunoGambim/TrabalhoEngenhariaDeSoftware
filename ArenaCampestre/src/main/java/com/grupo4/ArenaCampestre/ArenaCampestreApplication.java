@@ -22,7 +22,7 @@ public class ArenaCampestreApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		Seat seat1 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C13");
+		Seat seat1 = new Seat(Sector.MIDDLE_EAST, SeatState.SOLD, "C13");
 		Seat seat2 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C14");
 		Seat seat3 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C15");
 		Seat seat4 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C16");
