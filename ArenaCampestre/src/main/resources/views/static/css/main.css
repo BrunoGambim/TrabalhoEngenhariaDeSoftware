@@ -41,11 +41,15 @@ body {
 }
 
 .button-primary{
+	color: white;
     background-color: #027333;
     border-color: #025928;
+    box-shadow: none;
 }
 
 .button-primary:hover{
+	color: white;
+	box-shadow: none;
     background-color: #038C3E;
     border-color: #025928;
 }

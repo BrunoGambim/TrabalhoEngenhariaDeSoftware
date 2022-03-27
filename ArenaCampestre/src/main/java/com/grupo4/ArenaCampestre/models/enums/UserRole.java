@@ -1,13 +1,13 @@
 package com.grupo4.ArenaCampestre.models.enums;
 
-public enum Perfil {
+public enum UserRole {
 	CUSTUMER(1, "ROLE_CUSTOMER"),
 	MANAGER(2, "ROLE_MANAGER");
 
 	private int code;
 	private String description;
 	
-	private Perfil(int code, String description) {
+	private UserRole(int code, String description) {
 		this.code = code;
 		this.description = description;
 	}
@@ -16,24 +16,25 @@ public enum Perfil {
 		return this.code;
 	}
 	
-	public String getDescription() {
-		return description;
-	}
-	
-	public static Perfil toEnum(Integer code) {
+	public static UserRole toEnum(Integer code) {
 		if(code == null) {
 			return null;
 		}
-		return Perfil.toEnum((int) code);
+		return UserRole.toEnum((int) code);
 	}
 	
-	public static Perfil toEnum(int code) {
-		for(Perfil clientType : Perfil.values()) {
-			if(code == clientType.getCode()) {
-				return clientType;
+	public static UserRole toEnum(int code) {
+		for(UserRole userRole : UserRole.values()) {
+			if(code == userRole.getCode()) {
+				return userRole;
 			}
 		}
 		throw new IllegalArgumentException("Argumento inválido! Id:" + code);
+	}
+	
+	@Override
+	public String toString() {
+		return description;
 	}
 }
 

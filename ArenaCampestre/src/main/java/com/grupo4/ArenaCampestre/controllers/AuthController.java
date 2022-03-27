@@ -14,7 +14,7 @@ import com.grupo4.ArenaCampestre.models.services.UserService;
 import com.grupo4.ArenaCampestre.models.validators.UserValidator;
 
 @Controller
-public class UserController {
+public class AuthController {
     @Autowired
     private UserService userService;
 
@@ -27,7 +27,7 @@ public class UserController {
     @GetMapping("/registration")
     public String registration(Model model) {
         if (securityService.isAuthenticated()) {
-            return "redirect:/";
+            return "redirect:/home";
         }
 
         model.addAttribute("userForm", new User());
@@ -47,13 +47,13 @@ public class UserController {
 
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 
-        return "redirect:/welcome";
+        return "redirect:/home";
     }
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (securityService.isAuthenticated()) {
-            return "redirect:/";
+            return "redirect:/home";
         }
 
         if (error != null)
@@ -63,10 +63,5 @@ public class UserController {
             model.addAttribute("message", "Você saiu com sucesso.");
 
         return "login";
-    }
-
-    @GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
-        return "welcome";
     }
 }
