@@ -1,5 +1,9 @@
 package com.grupo4.ArenaCampestre;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,22 +26,19 @@ public class ArenaCampestreApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		Seat seat1 = new Seat(Sector.MIDDLE_EAST, SeatState.SOLD, "C13");
-		Seat seat2 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C14");
-		Seat seat3 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C15");
-		Seat seat4 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C16");
-		Seat seat5 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C17");
-		Seat seat6 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C18");
-		Seat seat7 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C19");
-		Seat seat8 = new Seat(Sector.LOWER_NORTH, SeatState.AVAILABLE_TO_BUY, "C20");
-		//seatRepository.save(seat1);
-		//seatRepository.save(seat2);
-		//seatRepository.save(seat3);
-		//seatRepository.save(seat4);
-		//seatRepository.save(seat5);
-		//seatRepository.save(seat6);
-		//seatRepository.save(seat7);
-		//seatRepository.save(seat8);
+		/*String[] letras = {"A","B","C","D","E","F","G","H","I","J","K","L","M"};
+		for(String letra : letras) {
+			for(Sector sector : Sector.values()) {
+				for(int i = 1; i < 10; i++) {
+					Seat seat = new Seat(sector, SeatState.AVAILABLE_TO_RENT, letra + "0" + i);
+					seatRepository.save(seat);
+				}
+				for(int i = 10; i <= 40; i++) {
+					Seat seat = new Seat(sector, SeatState.AVAILABLE_TO_RENT, letra + "" + i);
+					seatRepository.save(seat);
+				}
+			}
+		}*/
 	}
 
 }

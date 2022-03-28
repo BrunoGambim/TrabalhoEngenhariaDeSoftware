@@ -8,7 +8,16 @@
 </head>
 <body>
 	<header>
-      <h1>Arena Campestre</h1>
+	   <div class="header-container">
+	      <h1>Arena Campestre</h1>
+		  <form sec:authorize ="isAuthenticated()" id="logoutForm" method="POST" th:action="@{/logout}">
+	          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	          <button class="header-button btn btn-lg btn-outline-light  mt-1 mr-3" onclick="document.forms['logoutForm'].submit()">Deslogar</button>
+	      </form>
+	      <form sec:authorize ="!isAuthenticated()" id="logingForm"  method="GET" th:action="@{/login}">
+	          <button class="header-button btn btn-lg btn-outline-light mt-1 mr-3" onclick="document.forms['logingForm'].submit()">Logar</button>
+	      </form>
+      </div>
     </header>
     <div class="container-md pt-5">
       <form class="mb-2" th:action="@{/home}" method="get">
