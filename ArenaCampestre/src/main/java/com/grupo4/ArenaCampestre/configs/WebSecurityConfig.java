@@ -12,8 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.grupo4.ArenaCampestre.handlers.CustomAccessDeniedHandler;
+import com.grupo4.ArenaCampestre.handlers.CustomAuthenticationSuccessHandler;
 import com.grupo4.ArenaCampestre.models.enums.UserRole;
 
 @Configuration
@@ -46,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
             .and()
             .formLogin()
+            	.successHandler(authenticationSuccessHandler())
                 .loginPage("/login")
                 .permitAll()
                 .and()
@@ -61,6 +64,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
+    }
+    
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
     }
     
     @Override

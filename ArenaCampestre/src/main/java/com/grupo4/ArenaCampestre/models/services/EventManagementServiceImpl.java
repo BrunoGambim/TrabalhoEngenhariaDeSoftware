@@ -14,8 +14,13 @@ public class EventManagementServiceImpl implements EventManagementService{
 	@Autowired
 	EventRepository eventRepository;
 	
-	public void AddEvent(String name, String description, Date date) {
-		Event event = new  Event(name, description, date);
+	@Override
+	public void addEvent(Event event) {
 		eventRepository.save(event);
+	}
+	
+	@Override
+	public Event findByDate(Date date) {
+		return eventRepository.findByDate(date);
 	}
 }
