@@ -9,8 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.grupo4.ArenaCampestre.models.enums.UserRole;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_MATCHERS = {
     		"/css/**", "/js/**", "/registration","/home" , "/"
 	};
+    
+    private static final String[] MANAGER_MATCHERS = {
+    		"/manager/event/**"
+	};
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -30,9 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .antMatchers(MANAGER_MATCHERS).hasAnyAuthority(UserRole.MANAGER.toString())
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

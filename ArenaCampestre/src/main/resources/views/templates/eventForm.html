@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <title>Arena Campestre</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+	<header>
+	   <div class="header-container">
+	      <h1>Arena Campestre</h1>
+		  <form sec:authorize ="isAuthenticated()" id="logoutForm" method="POST" th:action="@{/logout}">
+	          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	          <button class="header-button btn btn-lg btn-outline-light  mt-1 mr-3" onclick="document.forms['logoutForm'].submit()">Deslogar</button>
+	      </form>
+	      <form sec:authorize ="!isAuthenticated()" id="logingForm"  method="GET" th:action="@{/login}">
+	          <button class="header-button btn btn-lg btn-outline-light mt-1 mr-3" onclick="document.forms['logingForm'].submit()">Logar</button>
+	      </form>
+      </div>
+    </header>
+    <div class="container-md pt-5">
+      <form class="mb-2" th:action="@{/home}" method="get">
+	    <select class="form-select form-control" name="sector" id="sector" th:value="${sector}" onchange="this.form.submit()">
+		  <option th:selected="${sectorCode == 0}" value="0">Setor</option>
+		  <option th:each="sector: ${sectors}" th:selected="${sectorCode == sector.code}" th:value="${sector.code}"><span th:text="${sector}"></span></option>
+		</select>
+      </form>
+      <div th:each="seat: ${seats}" class="card mb-2">
+		  <div class="card-body row">
+		    <div class="col">
+		      <span th:text="${seat.code}"></span>
+		    </div>
+		    <div  class="col">
+			  <span th:text="${seat.state}"></span>
+		    </div>
+		    <div class="col">
+		      <span th:text="${seat.sector}"></span>
+		    </div>
+		    <div class="col">
+		      R$ <span th:text="${seat.price}"></span>
+		    </div>
+		  </div>
+	  </div>
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

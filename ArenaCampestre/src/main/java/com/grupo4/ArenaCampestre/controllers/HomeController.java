@@ -20,7 +20,7 @@ public class HomeController {
 	@Autowired
 	SeatService seatService;
 	
-	@GetMapping({"/", "/home"})
+	@GetMapping({"", "/", "/home"})
     public String home(Model model, @RequestParam(name = "sector", defaultValue = "0") Integer sectorCode) {
 		List<Seat> seats;
 		if(sectorCode == NO_SECTOR_SELECTED) {
