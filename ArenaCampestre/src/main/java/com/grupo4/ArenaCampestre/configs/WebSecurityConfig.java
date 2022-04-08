@@ -9,10 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
+import com.grupo4.ArenaCampestre.handlers.CustomAccessDeniedHandler;
 import com.grupo4.ArenaCampestre.models.enums.UserRole;
 
 @Configuration
@@ -42,6 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(MANAGER_MATCHERS).hasAnyAuthority(UserRole.MANAGER.toString())
                 .anyRequest().authenticated()
                 .and()
+            .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+            .and()
             .formLogin()
                 .loginPage("/login")
                 .permitAll()
@@ -53,6 +56,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
        return authenticationManager();
+    }
+    
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
     }
     
     @Override
