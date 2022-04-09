@@ -26,4 +26,12 @@ public class SeatServiceImpl implements SeatService{
 	public List<Seat> findBySectorAndStateNot(Sector sector, SeatState state) {
 		return seatRepository.findBySectorAndStateNot(sector, state);
 	}
+
+	@Override
+	public void setSeatsForSale(List<Seat> seats) {
+		for(Seat seat: seats) {
+			seat.setState(SeatState.AVAILABLE_TO_BUY);
+		}
+		seatRepository.saveAll(seats);
+	}
 }

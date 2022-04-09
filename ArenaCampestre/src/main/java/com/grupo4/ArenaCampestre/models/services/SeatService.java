@@ -7,6 +7,7 @@ import com.grupo4.ArenaCampestre.models.enums.SeatState;
 import com.grupo4.ArenaCampestre.models.enums.Sector;
 
 public interface SeatService {
-	List<Seat> findByStateNot(SeatState state);
-	List<Seat> findBySectorAndStateNot(Sector sector, SeatState state);
+	public List<Seat> findByStateNot(SeatState state);
+	public List<Seat> findBySectorAndStateNot(Sector sector, SeatState state);
+	public void setSeatsForSale(List<Seat> seats);
 }
