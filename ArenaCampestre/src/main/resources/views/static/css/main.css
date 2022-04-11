@@ -79,8 +79,6 @@ body {
 .form-signin .form-control {
     position: relative;
     height: auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 10px;
     font-size: 16px;
@@ -98,8 +96,7 @@ body {
 
 .form-signin input {
     margin-top: 10px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+    border: 2px solid #D9D5D2;
 }
 
 .form-signin button {
@@ -131,10 +128,9 @@ body {
     z-index: 2;
 }
 
-.form-event input {
+.form-event input, .form-event textarea{
     margin-top: 10px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+    border: 2px solid #D9D5D2;
 }
 
 .form-event button {
@@ -150,11 +146,11 @@ body {
     color: red
 }
 
-.registration-link{
+.remove-link{
     color: white;
 }
 
-.registration-link:hover{
+.remove-link:hover{
     color: white;
     text-decoration: none;
 }

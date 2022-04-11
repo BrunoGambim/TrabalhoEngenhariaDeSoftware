@@ -1,11 +1,14 @@
 package com.grupo4.ArenaCampestre.models.entities;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Event {
@@ -13,6 +16,8 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 	
+	@OneToMany(mappedBy="event")
+	List<Rent> rentTransactions = new ArrayList<>();
 	String name;
 	String description;
 	Date date;

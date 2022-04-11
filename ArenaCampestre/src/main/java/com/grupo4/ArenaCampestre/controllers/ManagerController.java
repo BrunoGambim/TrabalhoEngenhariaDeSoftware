@@ -32,6 +32,11 @@ public class ManagerController {
 	@Autowired
 	EventValidator eventValidator;
 	
+	@GetMapping("/manager")
+    public String managerControllerPanel(Model model) {
+        return "managerControllerPanel";
+    }
+	
 	@GetMapping("/manager/event")
     public String eventForm(Model model) {
 		model.addAttribute("eventForm", new Event());
@@ -52,7 +57,6 @@ public class ManagerController {
 	
 	@PostMapping("/manager/seatsForSale")
     public String setSeatsForSale(Model model,  @ModelAttribute("seatForSaleForm")  SeatsForSaleFormDto seatsForSaleFormDto) {
-		seatsForSaleFormDto.getSeatList().forEach(a -> {System.out.println(a.getId());});
 		seatService.setSeatsForSale(seatsForSaleFormDto.getSeatList());
 		List<Seat> seats = seatService.findByStateNot(SeatState.SOLD);
 		SeatsForSaleFormDto dto = new SeatsForSaleFormDto(seats);

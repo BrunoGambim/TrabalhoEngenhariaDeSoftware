@@ -41,7 +41,7 @@
 		      R$ <span th:text="${seat.price}"></span>
 		    </div>
 		    <div class="col">
-			    <form id="rentForm" th:action="@{/customer/rent}" method="get">
+			    <form id="rentForm" th:action="@{/home}" method="get">
 			      <button class="btn btn-sm button-primary mt-0 mb-0 btn-block" onclick="document.forms['rentForm'].submit()">Alugar</button>
 			      <input type="hidden" name="seatId" th:value="${seat.id}"/>
 			    </form>
