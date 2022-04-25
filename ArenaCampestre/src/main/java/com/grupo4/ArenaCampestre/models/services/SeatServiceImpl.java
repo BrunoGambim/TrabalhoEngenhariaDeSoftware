@@ -39,4 +39,14 @@ public class SeatServiceImpl implements SeatService{
 		}
 		seatRepository.saveAll(seats);
 	}
+
+	@Override
+	public List<Seat> findByStateNotAndEvent(SeatState state, Long id) {
+		return seatRepository.findByStateNotAndEvent(state,id);
+	}
+
+	@Override
+	public List<Seat> findBySectorAndStateAndEvent(Sector sector, SeatState state, Long id) {
+		return seatRepository.findBySectorAndStateAndEvent(sector, state, id);
+	}
 }

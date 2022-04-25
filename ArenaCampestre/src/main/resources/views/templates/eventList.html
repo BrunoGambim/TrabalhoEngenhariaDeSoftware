@@ -32,10 +32,9 @@
 		      <span th:text="${event.description}"></span>
 		    </div>
 		    <div class="col">
-			    <form id="rentForm" th:action="@{/customer/rent}" method="post">
-			      <button class="btn btn-sm button-primary mt-0 mb-0 btn-block" onclick="document.forms['rentForm'].submit()">Alugar</button>
+			    <form id="rentForm" th:action="@{/customer/rent/seats}" method="get">
+			      <button class="btn btn-sm button-primary mt-0 mb-0 btn-block" onclick="document.forms['rentForm'].submit()">Mostrar Cadeiras</button>
 			      <input type="hidden" name="eventId" th:value="${event.id}"/>
-			      <input type="hidden" name="seatId" th:value="${seatId}"/>
 			    </form>
 		    </div>
 		  </div>

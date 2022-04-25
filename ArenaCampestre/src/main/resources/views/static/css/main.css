@@ -158,3 +158,30 @@ body {
 .checkbox{
 	height: 17px; display: inline;
 }
+
+.nav-box{
+	margin-right: 5rem;
+	display: inline-block;
+}
+a.nav-text{
+	font-size: 1.6rem;
+    border-radius: 1rem;
+    transition: all .4s linear;
+    padding: .6rem;
+}
+
+a.nav-text:hover{
+    color: #025928;
+    background-color: white;
+}
+
+.card-desc-title{
+	font-size: 1.5rem;
+}
+.card-desc{
+	font-size: 1.1rem;
+	line-height: 0.35em;
+}
+.card-desc-box{
+	padding-top: 1rem;
+}

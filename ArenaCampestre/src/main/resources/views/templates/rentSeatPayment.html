@@ -3,7 +3,7 @@
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
-      <title>Logue com uma conta</title>
+      <title>Realizar Pagamento</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
       <link href="../static/main.css" rel="stylesheet">
       <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
@@ -13,24 +13,28 @@
     <header>
       <h1>Arena Campestre</h1>
     </header>
-    <div class="container-md">
-      <form class="form-signin" method="POST" th:action="@{/login}">
-        <h2 class="form-heading">Logar</h2>
-
+      <form class="form-signin" id="rentForm" th:action="@{/customer/rent}" method="post">
+      	<div class="container-md">
+	    <h2 class="form-heading">Deseja alugar a cadeira?</h2>
+      	<div class="card-desc-box">
+			<h3 class="card-desc-title">Cadeira</h3>
+		    <p class="card-desc">Setor: <span th:text="${seat.sector}"></span></p>
+			<p class="card-desc">Estado: <span th:text="${seat.state}"></span></p>
+		    <p class="card-desc">Código: <span th:text="${seat.code}"></span></p>
+		    <p class="card-desc">Preço: R$<span th:text="${seat.price}"></span></p>
+	    </div>
+	    <div class="card-desc-box pb-2">
+			<h3 class="card-desc-title">Evento</h3>
+		    <p class="card-desc">Nome: <span th:text="${event.name}"></span></p>
+			<p class="card-desc">Data: <span th:text="${event.date}"></span></p>
+		    <p class="card-desc">Descrição: <span th:text="${event.description}"></span></p>
+	    </div>
         <div class="form-group">
-            <span th:text="${message}"></span>
-            <input name="username" type="text" class="form-control" placeholder="Usuário"
-                   autofocus="true"/>
-
-            <input name="password" type="password" class="form-control" placeholder="Senha"/>
-            <span class="has-error" th:text="${error}"></span>
-
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-            <button class="btn btn-lg button-primary btn-block" type="submit">Logar</button>
-            <div class="mt-2">
-                <a href="/registration" class="remove-link"><span class="btn btn-lg button-primary btn-block">Criar uma conta</span></a>
-            </div>
+            <form>
+			      <button class="btn btn-lg button-primary btn-block" onclick="document.forms['rentForm'].submit()">Realizar Pagamento</button>
+			      <input type="hidden" name="seatId" th:value="${seat.id}"/>
+			      <input type="hidden" name="eventId" th:value="${event.id}"/>
+		    </form>
         </div>
       </form>
     </div>

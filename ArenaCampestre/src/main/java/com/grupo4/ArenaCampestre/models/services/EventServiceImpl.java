@@ -20,8 +20,8 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public List<Event> findEventBySeat(Long id, Date date) {
-		return eventRepository.findBySeat(id, date);
+	public List<Event> findByDateGreaterThan(Date date) {
+		return eventRepository.findByDateGreaterThan(date);
 	}
 	
 	@Override
@@ -33,4 +33,6 @@ public class EventServiceImpl implements EventService{
 	public Event findByDate(Date date) {
 		return eventRepository.findByDate(date);
 	}
+	
+	
 }
