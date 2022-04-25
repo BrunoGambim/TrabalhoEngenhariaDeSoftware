@@ -8,12 +8,12 @@ import org.springframework.validation.Validator;
 import org.thymeleaf.util.DateUtils;
 
 import com.grupo4.ArenaCampestre.models.entities.Event;
-import com.grupo4.ArenaCampestre.models.services.EventManagementService;
+import com.grupo4.ArenaCampestre.models.services.EventService;
 
 @Component
 public class EventValidator implements Validator {
     @Autowired
-    private EventManagementService eventManagementService;
+    private EventService eventService;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -33,7 +33,7 @@ public class EventValidator implements Validator {
         	errors.rejectValue("date", "Value.eventForm.date");
         }
         
-        if (eventManagementService.findByDate(event.getDate()) != null) {
+        if (eventService.findByDate(event.getDate()) != null) {
             errors.rejectValue("date", "Duplicate.eventForm.date");
         }
 

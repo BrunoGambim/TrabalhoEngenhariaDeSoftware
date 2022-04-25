@@ -17,14 +17,14 @@ import com.grupo4.ArenaCampestre.dtos.SeatsForSaleFormDto;
 import com.grupo4.ArenaCampestre.models.entities.Event;
 import com.grupo4.ArenaCampestre.models.entities.Seat;
 import com.grupo4.ArenaCampestre.models.enums.SeatState;
-import com.grupo4.ArenaCampestre.models.services.EventManagementService;
+import com.grupo4.ArenaCampestre.models.services.EventService;
 import com.grupo4.ArenaCampestre.models.services.SeatService;
 import com.grupo4.ArenaCampestre.models.validators.EventValidator;
 
 @Controller
 public class ManagerController {
 	@Autowired
-	EventManagementService eventManagementService;
+	EventService eventService;
 	
 	@Autowired
 	SeatService seatService;
@@ -72,7 +72,7 @@ public class ManagerController {
 			return "eventForm";
 		}
 		
-		eventManagementService.addEvent(eventForm);
+		eventService.addEvent(eventForm);
 
 		model.addAttribute("success", "O evento foi criado com sucesso!");
 		

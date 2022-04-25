@@ -10,4 +10,5 @@ public interface SeatService {
 	public List<Seat> findByStateNot(SeatState state);
 	public List<Seat> findBySectorAndStateNot(Sector sector, SeatState state);
 	public void setSeatsForSale(List<Seat> seats);
+	public Seat findById(Long id);
 }

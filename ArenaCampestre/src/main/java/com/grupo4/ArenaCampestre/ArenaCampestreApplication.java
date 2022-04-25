@@ -57,10 +57,10 @@ public class ArenaCampestreApplication implements CommandLineRunner{
 			}
 		}*/
 		
-		Event event = this.eventRepository.findById(5207L).get();
-		Seat seat = this.seatRepository.findById(400L).get();
-		Customer customer = (Customer)this.userRepository.findById(1L).get();
-		Rent rent = new Rent(seat, customer, event, 13D);
+		//Event event = this.eventRepository.findById(5207L).get();
+		//Seat seat = this.seatRepository.findById(400L).get();
+		//Customer customer = (Customer)this.userRepository.findById(1L).get();
+		//Rent rent = new Rent(seat, customer, event, 13D);
 		//transactionRepository.save(rent);
 		//transactionRepository.delete(transactionRepository.getById(5206L));
 		//this.eventRepository.findByRent(499L,new Date(new java.util.Date().getTime())).forEach(a->{

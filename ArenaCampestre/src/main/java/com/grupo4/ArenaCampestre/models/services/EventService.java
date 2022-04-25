@@ -1,10 +1,13 @@
 package com.grupo4.ArenaCampestre.models.services;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.grupo4.ArenaCampestre.models.entities.Event;
 
-public interface EventManagementService {
+public interface EventService {
+	public Event findEventById(Long id);
+	public List<Event> findEventBySeat(Long id, Date date);
 	void addEvent(Event event);
 	Event findByDate(Date date);
 }

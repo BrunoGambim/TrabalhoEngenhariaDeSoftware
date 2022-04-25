@@ -13,7 +13,7 @@ import com.grupo4.ArenaCampestre.models.entities.Event;
 public interface EventRepository extends JpaRepository<Event, Long>{
 	Event findByDate(Date date);
 	
-	@Query(value="SELECT distinct event.* FROM event left join rent on event.id = rent.event_id or event_id = null left join transaction on rent.id = transaction.id where ifnull(seat_id,999999) != :seatId and event.date > :date", nativeQuery=true)
-	List<Event> findByRent(Long seatId, Date date);
+	@Query(value="select * from event where id not in (SELECT distinct event_id FROM event left join rent on event.id = rent.event_id left join transaction on rent.id = transaction.id where seat_id = :seatId) and event.date > :date", nativeQuery=true)
+	List<Event> findBySeat(Long seatId, Date date);
 }
 
