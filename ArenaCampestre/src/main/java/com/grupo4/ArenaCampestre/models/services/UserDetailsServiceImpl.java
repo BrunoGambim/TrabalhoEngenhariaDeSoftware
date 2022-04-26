@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         	grantedAuthorities.add(new SimpleGrantedAuthority(UserRole.MANAGER.toString()));
         }
         if(user instanceof Customer) {
-        	grantedAuthorities.add(new SimpleGrantedAuthority(UserRole.CUSTUMER.toString()));
+        	grantedAuthorities.add(new SimpleGrantedAuthority(UserRole.CUSTOMER.toString()));
         }
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);

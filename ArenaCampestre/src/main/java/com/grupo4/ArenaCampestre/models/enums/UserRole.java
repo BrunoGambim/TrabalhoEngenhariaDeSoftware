@@ -1,7 +1,7 @@
 package com.grupo4.ArenaCampestre.models.enums;
 
 public enum UserRole {
-	CUSTUMER(1, "ROLE_CUSTOMER"),
+	CUSTOMER(1, "ROLE_CUSTOMER"),
 	MANAGER(2, "ROLE_MANAGER");
 
 	private int code;
