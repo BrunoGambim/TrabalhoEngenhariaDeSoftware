@@ -29,6 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		"/css/**", "/js/**", "/registration","/home" , "/"
 	};
     
+    private static final String[] CUSTOMER_MATCHERS = {
+    		"/customer/rent/**"
+    };
+    
     private static final String[] MANAGER_MATCHERS = {
     		"/manager/event/**"
 	};
@@ -42,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .antMatchers(CUSTOMER_MATCHERS).hasAnyAuthority(UserRole.CUSTOMER.toString())
                 .antMatchers(MANAGER_MATCHERS).hasAnyAuthority(UserRole.MANAGER.toString())
                 .anyRequest().authenticated()
                 .and()

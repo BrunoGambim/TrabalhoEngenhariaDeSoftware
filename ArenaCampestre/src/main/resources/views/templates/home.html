@@ -14,8 +14,8 @@
 	      	<h1>Arena Campestre</h1>
 	      </div>
 	      <div class="nav-box">
-	      	<a href="/home" class="remove-link nav-text">Home</a>
-	      	<a href="/customer/rent" class="remove-link nav-text ml-2">Alugar</a>
+	      	<a sec:authorize ="isAuthenticated()" href="/home" class="remove-link nav-text">Home</a>
+	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/rent" class="remove-link nav-text ml-2">Alugar</a>
 	      </div>
 	   	</div>
 		  <form sec:authorize ="isAuthenticated()" id="logoutForm" method="POST" th:action="@{/logout}">

@@ -9,15 +9,7 @@
 <body>
 	<header>
 	   <div class="header-container">
-	   	<div>
-	   	  <div class="nav-box">
-	      	<h1>Arena Campestre</h1>
-	      </div>
-	      <div class="nav-box">
-	      	<a href="/home" class="remove-link nav-text">Home</a>
-	      	<a href="/customer/rent" class="remove-link nav-text ml-2">Alugar</a>
-	      </div>
-	   	</div>
+	      <h1>Arena Campestre</h1>
 		  <form sec:authorize ="isAuthenticated()" id="logoutForm" method="POST" th:action="@{/logout}">
 	          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	          <button class="header-button btn btn-lg btn-outline-light  mt-1 mr-3" onclick="document.forms['logoutForm'].submit()">Deslogar</button>

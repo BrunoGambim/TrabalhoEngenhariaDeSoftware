@@ -84,7 +84,7 @@ public class CustomerController {
 		if(eventId == -1) {
 			return "redirect:/home";
 		}
-	    Customer customer =  (Customer)userService.getLoggedUser();
+	    Customer customer = (Customer) userService.getLoggedUser();
 		Seat seat = seatService.findById(seatId);
 		Event event = eventService.findEventById(eventId);
 		Rent rent = new Rent(seat, customer, event, 50D);
