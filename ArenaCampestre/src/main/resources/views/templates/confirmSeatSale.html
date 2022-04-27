@@ -27,6 +27,9 @@
             <form>
 			      <button class="btn btn-lg button-primary btn-block" onclick="document.forms['paymentForm'].submit()">Confirmar a venda</button>
 			      <input type="hidden" name="seatId" th:value="${seat.id}"/>
+			      <div class="mt-2">
+		             <a href="/home" class="remove-link"><span class="btn btn-lg button-primary btn-block">Cancelar</span></a>
+		          </div>
 		    </form>
         </div>
       </form>

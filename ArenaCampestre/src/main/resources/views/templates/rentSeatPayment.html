@@ -34,6 +34,9 @@
 			      <button class="btn btn-lg button-primary btn-block" onclick="document.forms['rentForm'].submit()">Realizar Pagamento</button>
 			      <input type="hidden" name="seatId" th:value="${seat.id}"/>
 			      <input type="hidden" name="eventId" th:value="${event.id}"/>
+			      <div class="mt-2">
+		             <a href="/home" class="remove-link"><span class="btn btn-lg button-primary btn-block">Cancelar</span></a>
+		          </div>
 		    </form>
         </div>
       </form>

@@ -22,7 +22,8 @@
     <div class="container-md pt-5">
 	  <form id="seatForSaleForm" th:object="${seatForSaleForm}" method="POST" th:action="@{/manager/seatsForSale}">
 	  	  <div class="d-flex flex-row-reverse">
-	  	  	<button class="btn btn-lg button-primary" type="submit">Colocar cadeiras marcadas a venda</button>
+	        <a href="/home" class="remove-link"><span class="btn btn-lg button-primary">Voltar</span></a>
+	  	  	<button class="btn btn-lg button-primary mr-2" type="submit">Colocar cadeiras marcadas a venda</button>
 	  	  </div>
 	  	  <h2>Marque as cadeiras para venda:</h2>
 	      <div th:each="seat: ${seatForSaleForm.seatList}" class="card mb-2">
