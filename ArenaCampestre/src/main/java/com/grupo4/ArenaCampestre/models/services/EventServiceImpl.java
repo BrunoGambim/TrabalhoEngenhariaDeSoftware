@@ -33,6 +33,4 @@ public class EventServiceImpl implements EventService{
 	public Event findByDate(Date date) {
 		return eventRepository.findByDate(date);
 	}
-	
-	
 }

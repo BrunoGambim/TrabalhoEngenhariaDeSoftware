@@ -1,5 +1,6 @@
 package com.grupo4.ArenaCampestre.controllers;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.grupo4.ArenaCampestre.controllers.utils.DateUtils;
-import com.grupo4.ArenaCampestre.models.entities.Buy;
+import com.grupo4.ArenaCampestre.models.entities.Purchase;
 import com.grupo4.ArenaCampestre.models.entities.Customer;
 import com.grupo4.ArenaCampestre.models.entities.Event;
 import com.grupo4.ArenaCampestre.models.entities.Rent;
 import com.grupo4.ArenaCampestre.models.entities.Seat;
-import com.grupo4.ArenaCampestre.models.entities.Sell;
-import com.grupo4.ArenaCampestre.models.enums.BuyingStatus;
+import com.grupo4.ArenaCampestre.models.entities.Sale;
+import com.grupo4.ArenaCampestre.models.enums.PurchaseStatus;
 import com.grupo4.ArenaCampestre.models.enums.SeatState;
 import com.grupo4.ArenaCampestre.models.enums.Sector;
+import com.grupo4.ArenaCampestre.models.enums.TransactionTypes;
 import com.grupo4.ArenaCampestre.models.services.EventService;
 import com.grupo4.ArenaCampestre.models.services.SeatService;
 import com.grupo4.ArenaCampestre.models.services.TransactionService;
@@ -91,7 +93,7 @@ public class CustomerController {
 		return "redirect:/home";
     }
 	
-	@GetMapping("/customer/buy/seats")
+	@GetMapping("/customer/purchase/seats")
     public String showSeatsForSale(Model model, @RequestParam(name = "sector", defaultValue = "0") Integer sectorCode) {
 		List<Seat> seats;
 		if(sectorCode == NO_SECTOR_SELECTED) {
@@ -105,31 +107,31 @@ public class CustomerController {
         return "seatListForSale";
     }
 	
-	@GetMapping("/customer/buy/payment")
-    public String buySeatPayment(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
+	@GetMapping("/customer/purchase/payment")
+    public String purchaseSeatPayment(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
 		if(seatId == -1) {
 			return "redirect:/home";
 		}
 		Seat seat = seatService.findById(seatId);
 		model.addAttribute("seat",seat);
-		return "buySeatPayment";
+		return "purchaseSeatPayment";
     }
 	
-	@PostMapping("/customer/buy")
+	@PostMapping("/customer/purchase")
     public String rentSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
 		if(seatId == -1) {
 			return "redirect:/home";
 		}
 	    Customer customer = (Customer) userService.getLoggedUser();
 		Seat seat = seatService.findById(seatId);
-		Buy buy = new Buy(seat, customer, seat.getPrice(),DateUtils.getDateNow(), BuyingStatus.ACTIVE);
+		Purchase purchase = new Purchase(seat, customer, seat.getPrice(),DateUtils.getDateNow(), PurchaseStatus.ACTIVE);
 		seat.setState(SeatState.SOLD);
 		seatService.saveSeat(seat);
-		transactionService.save(buy);
+		transactionService.save(purchase);
 		return "redirect:/home";
     }
 	
-	@GetMapping("/customer/sell/seats")
+	@GetMapping("/customer/sale/seats")
     public String showCustomerSeats(Model model, @RequestParam(name = "sector", defaultValue = "0") Integer sectorCode) {
 		List<Seat> seats;
 		Customer customer = (Customer) userService.getLoggedUser();
@@ -144,30 +146,71 @@ public class CustomerController {
         return "customerSeats";
     }
 	
-	@GetMapping("/customer/sell/confirm")
-    public String confirmSellSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
+	@GetMapping("/customer/sale/confirm")
+    public String confirmSaleSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
 		if(seatId == -1) {
 			return "redirect:/home";
 		}
 		Seat seat = seatService.findById(seatId);
 		model.addAttribute("seat",seat);
-		return "confirmSellSeat";
+		return "confirmSeatSale";
     }
 	
-	@PostMapping("/customer/sell")
-    public String sellSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
+	@PostMapping("/customer/sale")
+    public String saleSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
 		if(seatId == -1) {
 			return "redirect:/home";
 		}
 	    Customer customer = (Customer) userService.getLoggedUser();
 		Seat seat = seatService.findById(seatId);
-		Sell sell = new Sell(seat, customer, seat.getPrice(),DateUtils.getDateNow());
+		Sale sale = new Sale(seat, customer, seat.getPrice(),DateUtils.getDateNow());
 		seat.setState(SeatState.AVAILABLE_TO_RENT);
-		Buy buy = transactionService.findBuyByCustomerAndSeat(seat, customer);
-		buy.setStatus(BuyingStatus.INACTIVE);
+		Purchase purchase = transactionService.findPurchaseByCustomerAndSeat(seat, customer);
+		if(purchase == null) {
+			System.out.println(" "+seat.getId()+"    "+customer.getId());
+		}
+		purchase.setStatus(PurchaseStatus.INACTIVE);
 		seatService.saveSeat(seat);
-		transactionService.save(sell);
-		transactionService.save(buy);
+		transactionService.save(sale);
+		transactionService.save(purchase);
 		return "redirect:/home";
+    }
+	
+	@GetMapping("/customer/report")
+    public String showReport(Model model, @RequestParam(name = "date", defaultValue = "") String stringDate,
+    		@RequestParam(name = "transactionTypesCode", defaultValue = "1") Integer transactionTypesCode) {
+		Customer customer = (Customer) userService.getLoggedUser();
+    	List<Sale> sales = null;
+    	List<Purchase> purchases = null;
+    	List<Rent> rents = null;
+    	if(stringDate.equals("")) {
+    		if(transactionTypesCode.equals((Integer)TransactionTypes.COMPRA.getCode()) || transactionTypesCode.equals((Integer)0)) {
+				purchases = transactionService.findPurchaseByCustomer(customer);
+    		}
+    		if(transactionTypesCode.equals((Integer)TransactionTypes.RENT.getCode()) || transactionTypesCode.equals((Integer)0)){
+    			rents = transactionService.findRentByCustomer(customer);
+    		}
+    		if(transactionTypesCode.equals((Integer)TransactionTypes.SALE.getCode()) || transactionTypesCode.equals((Integer)0)) {
+    			sales = transactionService.findSaleByCustomer(customer);
+    		}
+    	}else {
+    		Date date = DateUtils.dateFromString(stringDate);
+    		if(transactionTypesCode.equals((Integer)TransactionTypes.COMPRA.getCode()) || transactionTypesCode.equals((Integer)0)) {
+    			purchases = transactionService.findPurchaseByCustomerAndDateGreaterThan(date, customer);
+    		}
+    		if(transactionTypesCode.equals((Integer)TransactionTypes.RENT.getCode()) || transactionTypesCode.equals((Integer)0)){
+    			rents = transactionService.findRentByCustomerAndDateGreaterThan(date, customer);
+    		}
+    		if(transactionTypesCode.equals((Integer)TransactionTypes.SALE.getCode()) || transactionTypesCode.equals((Integer)0)) {
+    			sales = transactionService.findSaleByCustomerAndDateGreaterThan(date, customer);
+    		}
+    	}
+    	model.addAttribute("sales",sales);
+    	model.addAttribute("purchases",purchases);
+    	model.addAttribute("rents",rents);
+    	model.addAttribute("transactionTypesCode",transactionTypesCode);
+    	model.addAttribute("transactionTypes",TransactionTypes.values());
+    	
+        return "customerReport";
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.grupo4.ArenaCampestre.controllers.utils.DateUtils;
 import com.grupo4.ArenaCampestre.dtos.SeatsForSaleFormDto;
-import com.grupo4.ArenaCampestre.models.entities.Buy;
+import com.grupo4.ArenaCampestre.models.entities.Purchase;
 import com.grupo4.ArenaCampestre.models.entities.Event;
 import com.grupo4.ArenaCampestre.models.entities.Seat;
 import com.grupo4.ArenaCampestre.models.enums.SeatState;
@@ -85,14 +85,14 @@ public class ManagerController {
 	
     @GetMapping("/manager/report")
     public String showReport(Model model, @RequestParam(name = "date", defaultValue = "") String stringDate) {
-    	List<Buy> buys;
+    	List<Purchase> purchases;
     	if(stringDate.equals("")) {
-    		buys = transactionService.findAllBuys();
+    		purchases = transactionService.findAllPurchases();
     	}else {
     		Date date = DateUtils.dateFromString(stringDate);
-    		buys = transactionService.findByCreatedAtGreaterThanEqual(date);
+    		purchases = transactionService.findByCreatedAtGreaterThanEqual(date);
     	}
-    	model.addAttribute("buys",buys);
+    	model.addAttribute("purchases",purchases);
         return "managerReport";
     }
 }

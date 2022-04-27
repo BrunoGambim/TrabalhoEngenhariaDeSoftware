@@ -13,6 +13,7 @@ public class Rent extends Transaction{
 	
 	Rent(){
 	}
+	
 	public Rent(Seat seat, Customer customer, Event event, Date createdAt, Double price) {
 		super(seat, customer, price, createdAt);
 		this.event = event;

@@ -15,15 +15,20 @@
 	      </div>
 	      <div class="nav-box">
 	      	<a sec:authorize ="isAuthenticated()" href="/home" class="remove-link nav-text">Home</a>
-	      	<a href="/manager/event" class="remove-link nav-text ml-2">Criar evento</a>
-	      	<a href="/manager/seatsForSale" class="remove-link nav-text ml-2">Colocar cadeiras a venda</a>
-	      	<a href="/manager/report" class="remove-link nav-text ml-2">Gerar relatório</a>
+	      	<a href="/customer/rent" class="remove-link nav-text ml-2">Alugar</a>
+	      	<a href="/customer/purchase/seats" class="remove-link nav-text ml-2">Comprar</a>
+	      	<a href="/customer/sale/seats" class="remove-link nav-text ml-2">Vender</a>
+	      	<a href="/customer/report" class="remove-link nav-text ml-2">Emitir relatório</a>
 	      </div>
 	   	</div>
       </div>
     </header>
     <div class="container-md pt-5">
-      <form class="mb-2" th:action="@{/manager/report}" method="get">
+      <form class="mb-2" th:action="@{/customer/report}" method="get">
+	      	<select class="form-select form-control mb-2" name="transactionTypesCode" id="transactionTypes" th:value="${transactionTypes}">
+			  <option th:selected="${transactionTypesCode == 0}" value="0">Setor</option>
+			  <option th:each="transactionType: ${transactionTypes}" th:selected="${transactionTypesCode == transactionType.code}" th:value="${transactionType.code}"><span th:text="${transactionType}"></span></option>
+			</select>
 			<input type="date" class="form-control" name="date" placeholder="dd-mm-yyyy">
 			<button class="btn btn-lg button-primary btn-block mt-2" type='submit'> Pesquisar </button>
       </form>
@@ -43,7 +48,23 @@
 		    </div>
 		  </div>
 	  </div>
-      <div th:each="purchase: ${purchases}" class="card mb-2">
+      <div th:each="sale: ${sales}" class="card mb-2">
+		  <div class="card-body row">
+		   	<div class="col">
+		      <span th:text="${sale.customer.username}"></span>
+		    </div>
+		    <div class="col">
+		      <span th:text="${sale.seat.code}"></span><span>&emsp;</span><span th:text="${sale.seat.sector}"></span>
+		    </div>
+		    <div class="col">
+		      <span th:text="${sale.price}"></span>
+		    </div>
+		    <div class="col">
+		      <span th:text="${sale.createdAt}"></span>
+		    </div>
+		  </div>
+	  </div>
+	  <div th:each="purchase: ${purchases}" class="card mb-2">
 		  <div class="card-body row">
 		   	<div class="col">
 		      <span th:text="${purchase.customer.username}"></span>
@@ -56,6 +77,22 @@
 		    </div>
 		    <div class="col">
 		      <span th:text="${purchase.createdAt}"></span>
+		    </div>
+		  </div>
+	  </div>
+	  <div th:each="rent: ${rents}" class="card mb-2">
+		  <div class="card-body row">
+		   	<div class="col">
+		      <span th:text="${rent.customer.username}"></span>
+		    </div>
+		    <div class="col">
+		      <span th:text="${rent.seat.code}"></span><span>&emsp;</span><span th:text="${rent.seat.sector}"></span>
+		    </div>
+		    <div class="col">
+		      <span th:text="${rent.price}"></span>
+		    </div>
+		    <div class="col">
+		      <span th:text="${rent.createdAt}"></span>
 		    </div>
 		  </div>
 	  </div>

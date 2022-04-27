@@ -16,11 +16,12 @@
 	      <div class="nav-box">
 	      	<a sec:authorize ="isAuthenticated()" href="/home" class="remove-link nav-text">Home</a>
 	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/rent" class="remove-link nav-text ml-2">Alugar</a>
-	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/buy/seats" class="remove-link nav-text ml-2">Comprar</a>
-	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/sell/seats" class="remove-link nav-text ml-2">Vender</a>
+	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/purchase/seats" class="remove-link nav-text ml-2">Comprar</a>
+	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/sale/seats" class="remove-link nav-text ml-2">Vender</a>
+	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/report" class="remove-link nav-text ml-2">Emitir relatório</a>
 	      	<a sec:authorize="hasRole('ROLE_MANAGER')" href="/manager/event" class="remove-link nav-text ml-2">Criar evento</a>
 	      	<a sec:authorize="hasRole('ROLE_MANAGER')" href="/manager/seatsForSale" class="remove-link nav-text ml-2">Colocar cadeiras a venda</a>
-	      	<a sec:authorize="hasRole('ROLE_MANAGER')" href="/manager/report" class="remove-link nav-text ml-2">Gerar relatório</a>
+	      	<a sec:authorize="hasRole('ROLE_MANAGER')" href="/manager/report" class="remove-link nav-text ml-2">Emitir relatório</a>
 	      </div>
 	   	</div>
 		  <form sec:authorize ="isAuthenticated()" id="logoutForm" method="POST" th:action="@{/logout}">
