@@ -9,20 +9,7 @@
 <body>
 	<header>
 	   <div class="header-container">
-	   	<div>
-	   	  <div class="nav-box">
-	      	<h1>Arena Campestre</h1>
-	      </div>
-	      <div class="nav-box">
-	      	<a sec:authorize ="isAuthenticated()" href="/home" class="remove-link nav-text">Home</a>
-	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/rent" class="remove-link nav-text ml-2">Alugar</a>
-	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/buy/seats" class="remove-link nav-text ml-2">Comprar</a>
-	      	<a sec:authorize="hasRole('ROLE_CUSTOMER')" href="/customer/sell/seats" class="remove-link nav-text ml-2">Vender</a>
-	      	<a sec:authorize="hasRole('ROLE_MANAGER')" href="/manager/event" class="remove-link nav-text ml-2">Criar evento</a>
-	      	<a sec:authorize="hasRole('ROLE_MANAGER')" href="/manager/seatsForSale" class="remove-link nav-text ml-2">Colocar cadeiras a venda</a>
-	      	<a sec:authorize="hasRole('ROLE_MANAGER')" href="/manager/report" class="remove-link nav-text ml-2">Gerar relatório</a>
-	      </div>
-	   	</div>
+	      <h1>Arena Campestre</h1>
 		  <form sec:authorize ="isAuthenticated()" id="logoutForm" method="POST" th:action="@{/logout}">
 	          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	          <button class="header-button btn btn-lg btn-outline-light  mt-1 mr-3" onclick="document.forms['logoutForm'].submit()">Deslogar</button>
@@ -33,7 +20,7 @@
       </div>
     </header>
     <div class="container-md pt-5">
-      <form class="mb-2" th:action="@{/home}" method="get">
+      <form class="mb-2" th:action="@{/customer/buy/seats}" method="get">
 	    <select class="form-select form-control" name="sector" id="sector" th:value="${sector}" onchange="this.form.submit()">
 		  <option th:selected="${sectorCode == 0}" value="0">Setor</option>
 		  <option th:each="sector: ${sectors}" th:selected="${sectorCode == sector.code}" th:value="${sector.code}"><span th:text="${sector}"></span></option>
@@ -52,6 +39,12 @@
 		    </div>
 		    <div class="col">
 		      R$ <span th:text="${seat.price}"></span>
+		    </div>
+		    <div class="col">
+			    <form id="rentForm" th:action="@{/customer/buy/payment}" method="get">
+			      <button class="btn btn-sm button-primary mt-0 mb-0 btn-block" onclick="document.forms['rentForm'].submit()">Comprar</button>
+			      <input type="hidden" name="seatId" th:value="${seat.id}"/>
+			    </form>
 		    </div>
 		  </div>
 	  </div>

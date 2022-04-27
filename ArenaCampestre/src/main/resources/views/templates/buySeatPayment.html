@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>Realizar Pagamento</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+      <link href="../static/main.css" rel="stylesheet">
+      <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Arena Campestre</h1>
+    </header>
+      <form class="form-signin" id="paymentForm" th:action="@{/customer/buy}" method="post">
+      	<div class="container-md">
+	    <h2 class="form-heading">Deseja comprar a cadeira?</h2>
+      	<div class="card-desc-box">
+			<h3 class="card-desc-title">Cadeira</h3>
+		    <p class="card-desc">Setor: <span th:text="${seat.sector}"></span></p>
+			<p class="card-desc">Estado: <span th:text="${seat.state}"></span></p>
+		    <p class="card-desc">Código: <span th:text="${seat.code}"></span></p>
+		    <p class="card-desc">Preço: R$<span th:text="${seat.price}"></span></p>
+	    </div>
+        <div class="form-group">
+            <form>
+			      <button class="btn btn-lg button-primary btn-block" onclick="document.forms['paymentForm'].submit()">Realizar Pagamento</button>
+			      <input type="hidden" name="seatId" th:value="${seat.id}"/>
+		    </form>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

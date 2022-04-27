@@ -20,9 +20,34 @@
       </div>
     </header>
     <div class="container-md pt-5">
-      <a href="/manager/event" class="remove-link btn-block mt-3 row"><span class="btn btn-lg button-primary btn-block">Criar evento</span></a>
-      <a href="/manager/seatsForSale" class="remove-link btn-block mt-3 row"><span class="btn btn-lg button-primary btn-block">Colocar cadeiras a venda</span></a>
-      <a href="/" class="remove-link btn-block mt-3 row"><span class="btn btn-lg button-primary btn-block">Gerar relatório</span></a>
+      <form class="mb-2" th:action="@{/customer/sell/seats}" method="get">
+	    <select class="form-select form-control" name="sector" id="sector" th:value="${sector}" onchange="this.form.submit()">
+		  <option th:selected="${sectorCode == 0}" value="0">Setor</option>
+		  <option th:each="sector: ${sectors}" th:selected="${sectorCode == sector.code}" th:value="${sector.code}"><span th:text="${sector}"></span></option>
+		</select>
+      </form>
+      <div th:each="seat: ${seats}" class="card mb-2">
+		  <div class="card-body row">
+		    <div class="col">
+		      <span th:text="${seat.code}"></span>
+		    </div>
+		    <div  class="col">
+			  <span th:text="${seat.state}"></span>
+		    </div>
+		    <div class="col">
+		      <span th:text="${seat.sector}"></span>
+		    </div>
+		    <div class="col">
+		      R$ <span th:text="${seat.price}"></span>
+		    </div>
+		    <div class="col">
+			    <form id="rentForm" th:action="@{/customer/sell/confirm}" method="get">
+			      <button class="btn btn-sm button-primary mt-0 mb-0 btn-block" onclick="document.forms['rentForm'].submit()">Vender</button>
+			      <input type="hidden" name="seatId" th:value="${seat.id}"/>
+			    </form>
+		    </div>
+		  </div>
+	  </div>
     </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

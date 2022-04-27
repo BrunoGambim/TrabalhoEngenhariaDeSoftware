@@ -1,5 +1,7 @@
 package com.grupo4.ArenaCampestre.models.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -11,8 +13,8 @@ public class Rent extends Transaction{
 	
 	Rent(){
 	}
-	public Rent(Seat seat, Customer customer, Event event, Double price) {
-		super(seat, customer, price);
+	public Rent(Seat seat, Customer customer, Event event, Date createdAt, Double price) {
+		super(seat, customer, price, createdAt);
 		this.event = event;
 	}
 

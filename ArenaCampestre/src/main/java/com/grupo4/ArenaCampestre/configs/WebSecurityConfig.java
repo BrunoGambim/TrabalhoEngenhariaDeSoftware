@@ -30,11 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	};
     
     private static final String[] CUSTOMER_MATCHERS = {
-    		"/customer/rent/**"
+    		"/customer/**"
     };
     
     private static final String[] MANAGER_MATCHERS = {
-    		"/manager/event/**"
+    		"/manager/**"
 	};
 
     @Bean

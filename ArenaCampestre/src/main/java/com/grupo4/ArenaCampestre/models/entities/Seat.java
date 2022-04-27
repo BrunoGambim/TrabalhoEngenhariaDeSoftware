@@ -12,11 +12,12 @@ import com.grupo4.ArenaCampestre.models.enums.Sector;
 public class Seat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id;
+	private Long id;
+	private Sector sector;
+	private SeatState state;
+	private String code;
 	
-	Sector sector;
-	SeatState state;
-	String code;
+	private static double PRICE = 50;
 	
 	public Seat() {
 	}
@@ -57,7 +58,7 @@ public class Seat {
 	}
 	
 	public Double getPrice() {
-		return 50.00;
+		return PRICE;
 	}
 
 	public void setCode(String code) {

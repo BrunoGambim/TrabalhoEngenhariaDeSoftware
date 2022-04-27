@@ -14,13 +14,13 @@ import javax.persistence.OneToMany;
 public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id;
+	private Long id;
 	
 	@OneToMany(mappedBy="event")
-	List<Rent> rentTransactions = new ArrayList<>();
-	String name;
-	String description;
-	Date date;
+	private List<Rent> rentTransactions = new ArrayList<>();
+	private String name;
+	private String description;
+	private Date date;
 	
 	public Event() {
 		
