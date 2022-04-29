@@ -118,7 +118,7 @@ public class CustomerController {
     }
 	
 	@PostMapping("/customer/purchase")
-    public String rentSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
+    public String purchaseSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
 		if(seatId == -1) {
 			return "redirect:/home";
 		}
@@ -147,7 +147,7 @@ public class CustomerController {
     }
 	
 	@GetMapping("/customer/sale/confirm")
-    public String confirmSaleSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
+    public String confirmSeatSale(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
 		if(seatId == -1) {
 			return "redirect:/home";
 		}
@@ -157,7 +157,7 @@ public class CustomerController {
     }
 	
 	@PostMapping("/customer/sale")
-    public String saleSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
+    public String sellSeat(Model model, @RequestParam(name = "seatId", defaultValue = "-1") Long seatId) {
 		if(seatId == -1) {
 			return "redirect:/home";
 		}
